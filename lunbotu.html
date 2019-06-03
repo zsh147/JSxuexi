@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>lunbotu</title>
+	</head>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		.content {
+			position: relative;
+			width: 600px;
+			height: 400px;
+			margin: 100px auto 0 auto;
+			box-shadow: 0 0 5px green;
+			overflow: hidden;
+		}
+
+		.wrap {
+			position: absolute;
+			width: 4200px;
+			height: 400px;
+			z-index: 1;
+		}
+
+		.content .wrap img {
+			float: left;
+			width: 600px;
+			height: 100%;
+		}
+
+		.buttons {
+			position: absolute;
+			right: 0;
+			bottom: 20px;
+			width: 300px;
+			height: 10px;
+			z-index: 2;
+		}
+
+		.buttons span {
+			margin-left: 5px;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			background-color: green;
+			text-align: center;
+			color: white;
+			cursor: pointer;
+		}
+
+		.buttons span.on {
+			background-color: red;
+		}
+
+		.arrow {
+			position: absolute;
+			top: 35%;
+			color: greenyellow;
+			padding: 0px 14px;
+			border-radius: 50%;
+			font-size: 50px;
+			z-index: 2;
+			display: none;
+		}
+
+		.content .arrow_left {
+			left: 10px;
+		}
+
+		.content .arrow_right {
+			right: 10px;
+		}
+
+		.content:hover .arrow {
+			display: block;
+		}
+
+		.content .arrow:hover {
+			background-color: rgba(0, 0, 0, 0.2);
+		}
+	</style>
+
+	<body>
+		<div class="content">
+			<div class="wrap" style="left: -600px;">
+				<img src="img/1.jpg" alt="1">
+				<img src="img/2.jpg" alt="2">
+				<img src="img/3.jpg" alt="3">
+				<img src="img/4.jpg" alt="4">
+				<img src="img/5.jpg" alt="5">
+				<img src="img/6.jpg" alt="6">
+				<img src="img/7.jpg" alt="7">
+				<img src="img/8.jpg" alt="8">
+			</div>
+<!-- 			<div class="buttons">
+				<span  class="on">1</span>
+				<span>2</span>
+				<span>3</span>
+				<span>4</span>
+				<span>5</span>
+			</div> -->
+			<a href="javascript:;" class="arrow arrow_left">&lt;</a>
+			<a href="javascript:;" class="arrow arrow_right">&gt;</a>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var wrap = document.querySelector(".wrap");
+		var next = document.querySelector(".arrow_right");
+		var prev = document.querySelector(".arrow_left");
+		next.onclick = function() {
+			next_pic();
+		}
+		prev.onclick = function() {
+			prev_pic();
+		}
+		// 循环播放
+		function next_pic() {
+			var newLeft;
+			if (wrap.style.left === "-3600px") {
+				newLeft = -1200;
+			} else {
+				newLeft = parseInt(wrap.style.left) - 600;
+			}
+			wrap.style.left = newLeft + "px";
+		}
+
+		function prev_pic() {
+			var newLeft;
+			if (wrap.style.left === "0px") {
+				newLeft = -2400;
+			} else {
+				newLeft = parseInt(wrap.style.left) + 600;
+			}
+			wrap.style.left = newLeft + "px";
+		}
+		// 自动播放
+		var timer = null;
+
+		function autoPlay() {
+			timer = setInterval(function() {
+				next_pic();
+			}, 2000);
+		}
+		autoPlay();
+		
+		// var index = 0;
+  //       var dots = document.getElementsByTagName("span");
+  //       function showCurrentDot () {
+  //           for(var i = 0, len = dots.length; i < len; i++){
+  //               dots[i].className = "";
+  //           }
+  //           dots[index].className = "on";
+  //       }
+		// 
+		// for (var i = 0, len = dots.length; i < len; i++){
+  //           (function(i){
+  //               dots[i].onclick = function () {
+  //                   var dis = index - i;
+  //                   if(index == 4 && parseInt(wrap.style.left)!==-3000){
+  //                       dis = dis - 5;     
+  //                   }
+  //                   //和使用prev和next相同，在最开始的照片5和最终的照片1在使用时会出现问题，导致符号和位数的出错，做相应地处理即可
+  //                   if(index == 0 && parseInt(wrap.style.left)!== -600){
+  //                       dis = 5 + dis;
+  //                   }
+  //                   wrap.style.left = (parseInt(wrap.style.left) +  dis * 600)+"px";
+  //                   index = i;
+  //                   showCurrentDot();
+  //               }
+  //           })(i);            
+  //       }
+	</script>
+</html>

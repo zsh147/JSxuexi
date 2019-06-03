@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>js选项卡练习</title>
+	</head>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		a{
+			text-decoration: none;
+			color: black;
+		}
+		a:hover {
+			text-decoration: none;
+			color: rosybrown;
+		}
+		#tab{
+			width: 300px;
+			padding: 5px;
+			height: 200px;
+			margin: 20px;
+		}
+		#tab ul li.on {
+			border-top:2px solid red;
+			border-bottom:2px solid gold;
+		}
+		#tab ul{
+			list-style: none;
+			display: ;
+			height: 30px;
+			line-height: 30px;
+			border-bottom:2px #c88 solid;
+		}
+		#tab ul li {
+			background: #FFF;
+			cursor: pointer;
+			float: left;
+			height:29px;
+			line-height: 29px;
+			padding: 0px 10px;
+			margin: 0px 10px;
+			border: 1px solid #BBB;
+			border-bottom: 2px solid #C88;
+		}
+		
+		#tab div {
+			height: 100px;
+			width:278px;
+			line-height: 24px;
+			border-top: none;
+			border: 1px solid #336699;
+			padding: 10px;
+			overflow: hidden;
+		}
+		.hide {
+			display: none;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function() {
+			var nbTab = document.getElementById("tab"); //获取整个div
+			var nbUl = nbTab.getElementsByTagName("ul")[0]; //一个节点
+			var nbLi = nbUl.getElementsByTagName("li"); //数组
+			var nbDiv = nbTab.getElementsByTagName("div"); //数组
+
+			for (var i = 0; i < nbLi.length; i++) {
+				nbLi[i].index = i;
+				nbLi[i].onclick = function() {
+					for (var j = 0; j < nbLi.length; j++) {
+						nbLi[j].className = "off";
+						nbDiv[j].className = "hide";
+					}
+					this.className = "on";
+					nbDiv[this.index].className = "show；"
+				}
+			}
+		}
+	</script>
+	<body>
+		<p>1、首先需要获取选项卡标题和选项卡内容</p>
+		<p>2、选项卡内容有三个，需要循环遍历来操作，得知哪个选项卡和哪个选项内容匹配。</p>
+		<p>3、通过改变DOM的css类名称,当前点击的选项卡显示，其它隐藏。 </p>
+		<!-- content -->
+		<div id="tab">
+			<ul>
+				<li class="on">选项1</li>
+				<li class="off">选项2</li>
+				<li class="off">选项3</li>
+			</ul>
+			<div id="apage" class="show">
+				<a href="">11111111111111111111</a>
+				<a href="">11111111111111111111</a>
+				<a href="">11111111111111111111</a>
+				<a href="">11111111111111111111</a>
+			</div>
+			<div id="bpage" class="hide">
+				<a href="">22222222222222222222</a>
+				<a href="">22222222222222222222</a>
+				<a href="">22222222222222222222</a>
+				<a href="">22222222222222222222</a>
+			</div>
+			<div id="cpage" class="hide">
+				<a href="">33333333333333333333</a>
+				<a href="">33333333333333333333</a>
+				<a href="">33333333333333333333</a>
+				<a href="">33333333333333333333</a>
+			</div>
+		</div>
+		<!-- end-content -->
+	</body>
+</html>
